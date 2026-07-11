@@ -4,5 +4,4 @@ This repository addresses the critical challenge of precise brain tumor segmenta
 
 The proposed framework is optimized using a composite loss function combining Dice Loss, IoU Loss, Boundary Loss, and Focal Loss, which collectively address both regional and boundary segmentation errors. To enhance model robustness and generalizability, we incorporate Gaussian blur-based data augmentation into our training pipeline, simulating real-world image quality variations. Our method is rigorously evaluated on the BraTS 2020 dataset following standardized preprocessing and evaluation protocols.
 
-![Uploading Presentation1000.jpg…]()
-![Uploading image.png…]()
+
