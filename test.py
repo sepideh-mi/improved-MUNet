@@ -1,3 +1,4 @@
+# ---- Test phase
 import os, csv, torch, numpy as np, nibabel as nib
 from torch.utils.data import DataLoader
 from model import MUNet
