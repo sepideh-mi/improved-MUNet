@@ -1,3 +1,4 @@
+# ------ Train phase
 import torch
 from torch.utils.data import DataLoader, WeightedRandomSampler
 from dataset import BraTSDataset, LightBraTSDataset
@@ -21,7 +22,6 @@ class Config:
     log_file = os.path.join(checkpoint_dir, "training_logs.csv")
     phase_specific = True
     METRICS = ['accuracy', 'precision', 'recall', 'mIoU', 'dice_score']
-    lr_scheduler = 'cosine'
     lr_warmup_epochs = 5
     early_stopping_patience = 20
 
