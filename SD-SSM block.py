@@ -1,5 +1,5 @@
 
-```python
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -75,4 +75,4 @@ class SDSSMBlock(nn.Module):
 
         fused = self.out_conv(self.final_norm(x1 + x2))
         return fused + self.residual(residual)      # residual connection
-```
+
