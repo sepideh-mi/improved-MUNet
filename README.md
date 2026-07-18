@@ -51,6 +51,9 @@ python train.py --root_dir ./data --csv_path ./metadata.csv
 
 
 
+![Uploading visual_case_7.png…]()
+
+
 
 
 
