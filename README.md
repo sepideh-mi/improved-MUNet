@@ -9,6 +9,12 @@ The proposed framework is optimized using a composite loss function combining Di
 <img width="1280" height="720" alt="improved MUNet0" src="https://github.com/user-attachments/assets/9f344f2b-5a0b-4950-847e-ac54823679a9" />
 
 
-# Title
-#How to run the code?
+
+# How to run the code?
+
 python train.py --root_dir ./data --csv_path ./metadata.csv
+
+
+
+
+
