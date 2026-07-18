@@ -110,28 +110,6 @@ class SegmentationLoss(nn.Module):
         return metrics
 
     # helper metrics
-    def _acc(self, p, t): return (p == t).float().mean()
-    def _precision(self, p, t):
-        per = []
-        for c in range(self.num_classes):
-            tp = ((p == c) & (t == c)).sum().float()
-            pp = (p == c).sum().float()
-            per.append(tp / (pp + 1e-6))
-        return torch.tensor(per).mean()
-    def _recall(self, p, t):
-        per = []
-        for c in range(self.num_classes):
-            tp = ((p == c) & (t == c)).sum().float()
-            ap = (t == c).sum().float()
-            per.append(tp / (ap + 1e-6))
-        return torch.tensor(per).mean()
-    def _fpr(self, p, t):
-        per = []
-        for c in range(self.num_classes):
-            fp = ((p == c) & (t != c)).sum().float()
-            an = (t != c).sum().float()
-            per.append(fp / (an + 1e-6))
-        return torch.tensor(per).mean()
     def _mean_iou(self, P, G):
         ious = []
         for c in range(self.num_classes):
