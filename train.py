@@ -26,17 +26,6 @@ class Config:
     early_stopping_patience = 20
 
 
-def masks_to_one_hot(masks, num_classes):
-    return F.one_hot(masks.long(), num_classes).permute(0,3,1,2).float()
-
-def safe_mean(vals):
-    vals = [v.item() if torch.is_tensor(v) else v for v in vals if v is not None]
-    return float(np.mean(vals)) if vals else 0.0
-
-def collate_fn(batch):
-    batch = [b for b in batch if b is not None]
-    return torch.stack([b[0] for b in batch]), torch.stack([b[1] for b in batch]), [b[2] for b in batch]
-
 # ----- Training loop 
 def main():
     os.makedirs(Config.checkpoint_dir, exist_ok=True)
