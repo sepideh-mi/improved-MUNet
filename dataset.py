@@ -6,8 +6,6 @@ import pandas as pd
 # ----- class weights via median frequency balancing -----
 def calculate_class_weights(class_counts):
     counts = torch.tensor(class_counts, dtype=torch.float32) + 1e-6
-    non_zero = counts[counts > 0]
-    median = torch.median(non_zero) if len(non_zero) else 1.0
     weights = median / counts
     weights /= weights.mean()
     return torch.clamp(weights, 0.5, 3.0)
@@ -72,18 +70,6 @@ class BraTSDataset(Dataset):
                 ids = set(df[id_col].astype(str))
                 return [d for d in all_dirs if os.path.basename(d) in ids]
         return all_dirs
-    # ----- get grades
-    def _load_grades(self):
-        grades = {}
-        if self.csv_path and os.path.exists(self.csv_path):
-            df = pd.read_csv(self.csv_path)
-            id_col = next((c for c in df.columns if 'ID' in c or 'subject' in c.lower()), None)
-            grade_col = next((c for c in df.columns if 'grade' in c.lower() or 'hgg' in c.lower()), None)
-            if id_col and grade_col:
-                for _, row in df.iterrows():
-                    g = str(row[grade_col]).upper()
-                    grades[str(row[id_col])] = "HGG" if "HGG" in g else "LGG" if "LGG" in g else "Unknown"
-        return grades
 
     # ---- preload path 
 
@@ -103,19 +89,7 @@ class BraTSDataset(Dataset):
             slice_map[case] = best_slice
         return slice_map
 
-    def _compute_weights(self, subset_size=50):
-        counts = np.zeros(self.out_channels, dtype=np.int64)
-        for _ in range(min(subset_size, len(self))):
-            idx = random.randint(0, len(self) - 1)
-            sample = self[idx]
-            if sample is None:
-                continue
-            _, mask, _ = sample
-            counts += np.bincount(mask.flatten().numpy(), minlength=self.out_channels)
-        if counts.sum() == 0:
-            return None, torch.ones(self.out_channels, dtype=torch.float32)
-        weights = calculate_class_weights(counts)
-        return counts, weights
+    
     # ---- augmentation 
     def _augment(self, img, mask):
         if random.random() < 0.5:
