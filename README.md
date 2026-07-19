@@ -6,7 +6,9 @@ The proposed framework is optimized using a composite loss function combining Di
 
 
 
-<img width="1280" height="720" alt="improved MUNet0" src="https://github.com/user-attachments/assets/9f344f2b-5a0b-4950-847e-ac54823679a9" />
+
+
+<img width="1280" height="720" alt="improved MUNet" src="https://github.com/user-attachments/assets/b58981b7-5af4-4c6a-9831-4845df6de1ae" />
 
 
 -----------------------------------------------------------------------------------
