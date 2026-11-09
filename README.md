@@ -13,16 +13,16 @@ The backbone is **not** a contribution of this work. The changes studied are:
 2. **ET-focused schedule.** The ET class weight is raised along a smooth-step schedule after a warm-up period and modulated by a conservative performance-feedback rule.
 3. **Boundary-aware blur augmentation.** Tumor boundaries get a stronger Gaussian blur than tumor interiors; healthy tissue is unchanged.
 
-![Training pipeline](images/pipeline.png)
+![Training pipeline](images/pipeline.jpg)
 
 ## Backbone
 
 MUNet-style U-Net on 4-channel 2D slices (FLAIR, T1, T1ce, T2): a 1x1 embedding to 64 channels, four SD-SSM blocks in the encoder (64 to 512 channels) with strided-convolution downsampling, an SD-SSM bottleneck, and a decoder with transposed convolutions, skip connections and 1x1 channel reduction. The output has four classes: background, non-enhancing core, edema, enhancing tumor.
 
-The SD-SSM block follows the design introduced with MUNet. In this implementation both branches are built from dilated depthwise/spatial-channel convolutions and linear layers (see `sd_ssm_block.py` and the paper, Section 3.2).
+The SD-SSM block follows the design introduced with MUNet. In this implementation, both branches are built from dilated depthwise/spatial-channel convolutions and linear layers (see `sd_ssm_block.py` and the paper, Section 3.2).
 
-![Network](images/network.png)
-![SD-SSM block](images/sd_ssm_block.png)
+![Network](images/network.jpg)
+![SD-SSM block](images/sd_ssm_block.jpg)
 
 ## Results (BraTS 2020, held-out test split, one slice per case)
 
@@ -38,7 +38,7 @@ HD95 is computed per slice in pixels over all region pixels, so it is not compar
 
 ## Limitations
 
-Evaluation is 2D, on one slice per case and one third of the cases, on a single test split with each model trained once. Components were selected in stages rather than jointly, and the baseline and the changed models differ in training budget. The results are preliminary; volumetric evaluation, repeated runs and component-wise ablations are needed.
+Evaluation is 2D, on one slice per case and one-third of the cases, on a single test split with each model trained once. Components were selected in stages rather than jointly, and the baseline and the changed models differ in training budget. The results are preliminary; volumetric evaluation, repeated runs, and component-wise ablations are needed.
 
 ## Repository layout
 
