@@ -43,7 +43,8 @@ Evaluation is 2D, on one slice per case and one third of the cases, on a single 
 ## Repository layout
 
 - `model.py`, `sd_ssm_block.py`: network (importable and runnable on its own)
-- `loss.py`: compound loss, ET-focused schedule and evaluation metrics
+- `loss.py`: compound loss (Dice, mIoU, boundary, focal)
+- `et_focus.py`: ET-focused schedule, performance feedback and per-sample ET difficulty weights
 - `boundary_blur.py`: boundary-aware blur augmentation (standalone)
 
 The rest of the data pipeline (`dataset.py`) and the training/evaluation scripts (`train.py`, `test.py`) are described in the paper (Sections 3.5 and 4.1) but are not published in this repository. They are available on request for review or reproduction; please contact me.
